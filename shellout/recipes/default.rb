@@ -8,7 +8,8 @@ end
 ruby_block 'shellout' do
   block do
     script_file.run_action(:create)
-    Chef::Log.info "@@@#{OpsWorks::ShellOut.shellout(script_file.name, :user => node["shellout"]["user"])}@@@"
+    output = OpsWorks::ShellOut.shellout(script_file.name, :user => node["shellout"]["user"])
+    Chef::Log.info "@@@#{output}@@@"
     script_file.run_action(:delete)
   end
 end
